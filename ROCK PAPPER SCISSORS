@@ -1,0 +1,94 @@
+import random
+
+print ("~~~~~~~~Welcome to ROCK,PAPPER,SCISSORS~~~~~~")
+
+#variables that we are going to use
+user_score = 0
+comp_score = 0
+ties = 0
+
+name = input("Enter your name :")
+
+#rules of games
+print(""" 
+Game Rules:
+1.Paper Vs Rock --> Paper
+2.Rock Vs Scissors --> Rock
+3.Scissors Vs Paper -->Scissors
+""")
+print()
+
+while True:
+#user choice
+    print("""Choices are:
+    1.Rock
+    2.Paper
+    3.Scissors
+    """)
+    choice =int(input("Enter your Choice from 0-3:"))
+    print()
+    while choice > 3 or choice < 1:
+        choice=int(input("Enter valid input"))
+
+    if choice == 1:
+        user_choice = "Rock"
+    elif choice == 2:
+        user_choice = "Paper"
+    else:
+        user_choice = "Scissors"
+
+    print("The user choice is:",user_choice)
+    print()
+    print("Now it is computers turn:")
+
+    computer = random.randint(1,3)
+
+    if computer == 1:
+        computer_choice = "Rock"
+    elif computer == 2:
+        computer_choice = "Paper"
+    else:
+        computer_choice = "Scissors"
+
+    print("The Computer_Choice is:",computer_choice)
+
+    #compare between choicese of user and computer
+    if (( user_choice == "Paper" and computer_choice == "Rock" ) or (user_choice == "Rock" and computer_choice == "Paper" )):
+         print("Paper wins")
+         result = "Paper"
+    elif((user_choice == "Scissors" and computer_choice == "Rock" ) or (user_choice == "Rock" and computer_choice == "Scissors")):
+        print("Rock wins")
+        result = "Rock"
+    elif(user_choice == computer_choice):  #if its tie
+        print("Its a Tie")
+    else:
+        print("Scissors wins")
+        result = "Scissors"
+
+    #Score
+
+    if result == "Tie":
+        ties +=1
+    elif result == user_choice:
+        print("User wins")
+        user_score +=1
+    else:
+        print("Computer wins")
+        comp_score +=1
+
+    print("Score are")
+    print(name,"User score is:",user_score)
+    print("Computer score:",comp_score)
+    print("ties are",ties)
+
+    repeat = input("Do you want to play again ? :")
+    if repeat == "No" or repeat == "No":
+        break
+
+    print("GAME OVER")
+    print("Thankyou for Playing")
+
+
+
+
+
