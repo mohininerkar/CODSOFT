@@ -1,0 +1,91 @@
+import tkinter as tk
+from tkinter import*
+from tkinter.font import Font
+
+
+root = tk.Tk()
+root.title(string="To-Do List" )
+root.geometry ("650x410+300+150")
+frame=LabelFrame(root,text="To-Do List",bg="Orange",font=(20))
+frame.pack(expand=True,fill=BOTH)
+
+
+
+#Font
+my_font = Font(
+    family="Arial",
+    size=20,
+    weight="bold"
+)
+
+#creating frame
+frame = tk.Frame(root)
+frame.pack(pady=10)
+
+#creating listbox
+my_list = Listbox(frame,
+                  font=my_font,
+                  width= 25 ,
+                  height= 5 ,
+                  bg="Black" ,
+                  bd=0,
+                  fg="Orange",
+                  highlightthickness=10,
+                  selectbackground="BLUE",
+                  activestyle="none"
+                  )
+
+my_list.pack(side=LEFT , fill=BOTH)
+
+# Creating scrollbar
+my_scrollbar = tk.Scrollbar(frame)
+my_scrollbar.pack(side=tk.RIGHT , fill=tk.BOTH)
+
+#adding  scrollbar
+my_list.config(yscrollcommand=my_scrollbar.set)
+my_scrollbar.config(command=my_list.yview())
+
+# Create entry box to add item to the list
+my_entry =tk.Entry(root, font=("Helvetica",20))
+my_entry.pack(pady=25)
+
+# Creating button frame
+button_frame = Frame(root)
+button_frame.pack(pady=20)
+
+# Functions
+def delete_items():
+    my_list.delete(ANCHOR)
+def add_items():
+    my_list.insert(END , my_entry.get())
+    my_entry.delete(0,END)
+def cross_items():
+    my_list.itemconfig(
+        my_list.curselection(),
+        fg="#D3D3D3")
+
+
+def delete_crossed_items():
+    count=0
+    while count < my_list.size():
+        if my_list.itemcget(count,"fg") == "#D3D3D3":
+            my_list.delete(count)
+        else:
+            count += 1
+
+
+
+
+
+# Adding buttons
+delete_button = Button(button_frame,text="Delete item", command=delete_items)
+add_button = Button(button_frame,text="Add item", command=add_items)
+cross_items_button =Button(button_frame,text="Cross item", command=cross_items)
+delete_crossed_items_button =Button(button_frame,text="Delete Cross item", command=delete_crossed_items)
+
+delete_button.grid(row=0 , column=0)
+add_button.grid(row=0 , column=1 , padx=20)
+cross_items_button.grid(row=0 , column=2)
+delete_crossed_items_button.grid(row=0 , column=4 ,padx=20)
+
+root.mainloop()
